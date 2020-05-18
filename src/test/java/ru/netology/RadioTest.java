@@ -9,6 +9,7 @@ class RadioTest {
 
     @Test
     void turnNextRadioStation() {
+        // проверка валидных значений
         radio.setLastRadioStation(9);
         radio.setFirstRadioStation(0);
         radio.setCurrentRadioStation(5);
@@ -44,9 +45,9 @@ class RadioTest {
 
     @Test
     void turnPreviousRadioStation() {
+        // проверка валидных значений
         radio.setLastRadioStation(9);
         radio.setFirstRadioStation(0);
-        // проверка валидных значений
         radio.setCurrentRadioStation(7);
         radio.turnPreviousRadioStation();
         int expected = (6);
