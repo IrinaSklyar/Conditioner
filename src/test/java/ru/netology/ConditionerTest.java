@@ -5,52 +5,78 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConditionerTest {
+    Conditioner conditioner = new Conditioner();
 
     @Test
     void increaseCurrentTemperature() {
-        Conditioner conditioner = new Conditioner();
         conditioner.setMaxTemperature(35);
-
         conditioner.setCurrentTemperature(25);
         conditioner.increaseCurrentTemperature();
         int expected = 26;
         int actual = conditioner.getCurrentTemperature();
-        assertEquals(expected, actual);
+        assertEquals(expected, actual);}
 
-        conditioner.setCurrentTemperature(35);
-        conditioner.increaseCurrentTemperature();
-        expected = 35;
-        actual = conditioner.getCurrentTemperature();
-        assertEquals(expected, actual);
-
+      @Test
+      void IncreaseIfCurrentTemperatureIsMax() {
+            conditioner.setMaxTemperature(35);
+            conditioner.setCurrentTemperature(35);
+            conditioner.increaseCurrentTemperature();
+            int expected = 35;
+            int actual = conditioner.getCurrentTemperature();
+            assertEquals(expected, actual);
+        }
+    @Test
+    void IncreaseIfCurrentTemperatureIsCloseToMax(){
+        conditioner.setMaxTemperature(35);
         conditioner.setCurrentTemperature(34);
         conditioner.increaseCurrentTemperature();
-        expected = 35;
-        actual = conditioner.getCurrentTemperature();
+        int expected = 35;
+        int actual = conditioner.getCurrentTemperature();
         assertEquals(expected, actual);
     }
 
     @Test
-    void decreaseCurrentTemperature() {
-        Conditioner conditioner = new Conditioner();
-        conditioner.setMinTemperature(10);
+    void IncreaseIfCurrentTemperatureIsAboveMax(){
+        conditioner.setMaxTemperature(35);
+        conditioner.setCurrentTemperature(38);
+        conditioner.increaseCurrentTemperature();
+        int expected = 38;
+        int actual = conditioner.getCurrentTemperature();
+        assertEquals(expected, actual);
+      }
 
+    @Test
+    void decreaseCurrentTemperature() {
+        conditioner.setMinTemperature(10);
         conditioner.setCurrentTemperature(25);
         conditioner.decreaseCurrentTemperature();
         int expected = 24;
         int actual = conditioner.getCurrentTemperature();
         assertEquals(expected, actual);
-
+    }
+    @Test
+    void DecreaseIfCurrentTemperatureIsCloseToMin() {
         conditioner.setCurrentTemperature(11);
         conditioner.decreaseCurrentTemperature();
-        expected = 10;
-        actual = conditioner.getCurrentTemperature();
+        int expected = 10;
+        int actual = conditioner.getCurrentTemperature();
         assertEquals(expected, actual);
-
+    }
+    @Test
+    void DecreaseIfCurrentTemperatureIsMin(){
         conditioner.setCurrentTemperature(10);
         conditioner.decreaseCurrentTemperature();
-        expected = 10;
-        actual = conditioner.getCurrentTemperature();
+        int expected = 10;
+        int actual = conditioner.getCurrentTemperature();
         assertEquals(expected, actual);
+    }
+    @Test
+    void DecreaseIfCurrentTemperatureIsBelowZero(){
+        conditioner.setCurrentTemperature(-5);
+        conditioner.decreaseCurrentTemperature();
+        int expected = -5;
+        int actual = conditioner.getCurrentTemperature();
+        assertEquals(expected, actual);
+
     }
 }

@@ -5,35 +5,45 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
+    Radio radio = new Radio();
 
     @Test
     void turnNextRadioStation() {
-        Radio radio = new Radio();
         radio.setLastRadioStation(9);
         radio.setFirstRadioStation(0);
-        // проверка валидных значений
         radio.setCurrentRadioStation(5);
         radio.turnNextRadioStation();
         int expected = 6;
         int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void turnNextIfCurrentIsCloseToLastStation() {
         //проверка граничных значений
+        radio.setLastRadioStation(9);
+        radio.setFirstRadioStation(0);
         radio.setCurrentRadioStation(8);
         radio.turnNextRadioStation();
-        expected = 9;
-        actual = radio.getCurrentRadioStation();
+        int expected = 9;
+        int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void turnNextIfCurrentIsLastStation() {
         // проверка выхода за границу валидных значений
+        radio.setLastRadioStation(9);
+        radio.setFirstRadioStation(0);
         radio.setCurrentRadioStation(9);
         radio.turnNextRadioStation();
-        expected = 0;
-        actual = radio.getCurrentRadioStation();
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
     }
 
     @Test
     void turnPreviousRadioStation() {
-        Radio radio = new Radio();
         radio.setLastRadioStation(9);
         radio.setFirstRadioStation(0);
         // проверка валидных значений
@@ -42,56 +52,75 @@ class RadioTest {
         int expected = (6);
         int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void turnPrevIfCurrentIsCloseToLast() {
         // проверка граничных значений
+        radio.setLastRadioStation(9);
+        radio.setFirstRadioStation(0);
         radio.setCurrentRadioStation(1);
         radio.turnPreviousRadioStation();
-        expected = 0;
-        actual = radio.getCurrentRadioStation();
-        assertEquals(expected, actual);
-        // проверка выхода за границу валидных значений
-        radio.setCurrentRadioStation(0);
-        radio.turnPreviousRadioStation();
-        expected = 9;
-        actual = radio.getCurrentRadioStation();
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
     }
 
     @Test
-    void turnUp() {
-        Radio radio = new Radio();
+    void turnPrevIfCurrentIsLast() {
+        // проверка выхода за границу валидных значений
+        radio.setLastRadioStation(9);
+        radio.setFirstRadioStation(0);
+        radio.setCurrentRadioStation(0);
+        radio.turnPreviousRadioStation();
+        int expected = 9;
+        int actual = radio.getCurrentRadioStation();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void turnUpVolume() {
+        // проверка валидных значений
         radio.setMaxVolume(10);
         radio.setMinVolume(0);
-        // проверка валидных значений
         radio.setCurrentVolume(5);
-        radio.turnUp();
+        radio.turnUpVolume();
         int expected = 6;
         int actual = radio.getCurrentVolume();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void turnUpVolumeIsMax() {
         // проверка выхода за границу валидных значений
+        radio.setMaxVolume(10);
+        radio.setMinVolume(0);
         radio.setCurrentVolume(10);
-        radio.turnUp();
-        expected = 10;
-        actual = radio.getCurrentVolume();
+        radio.turnUpVolume();
+        int expected = 10;
+        int actual = radio.getCurrentVolume();
         assertEquals(expected, actual);
     }
 
     @Test
-    void turnOff() {
-        Radio radio = new Radio();
+    void turnDownVolume() {
+        // проверка валидных значений
         radio.setMaxVolume(10);
         radio.setMinVolume(0);
-        // проверка валидных значений
         radio.setCurrentVolume(4);
-        radio.turnOff();
+        radio.turnDownVolume();
         int expected = 3;
         int actual = radio.getCurrentVolume();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void turnDownVolumeIsMin() {
         // проверка выхода за границу валидных значений
         radio.setCurrentVolume(0);
-        radio.turnOff();
-        expected = 0;
-        actual = radio. getCurrentVolume();
+        radio.turnDownVolume();
+        int expected = 0;
+        int actual = radio.getCurrentVolume();
         assertEquals(expected, actual);
-
     }
 }

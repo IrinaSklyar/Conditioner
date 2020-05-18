@@ -1,22 +1,12 @@
 package ru.netology;
 
 public class Radio {
-    String name;
     private int currentRadioStation;
     private int firstRadioStation;
     private int lastRadioStation;
     private int maxVolume;
     private int minVolume;
     private int currentVolume;
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getCurrentRadioStation() {
         return currentRadioStation;
@@ -66,7 +56,6 @@ public class Radio {
         this.currentVolume = currentVolume;
     }
 
-
     public void turnNextRadioStation() {
         if (currentRadioStation == lastRadioStation) {
             currentRadioStation = firstRadioStation;
@@ -74,29 +63,29 @@ public class Radio {
             currentRadioStation++;
         }
     }
-        public void turnPreviousRadioStation () {
-            if (currentRadioStation == firstRadioStation) {
-                currentRadioStation = lastRadioStation;
-            } else {
-                currentRadioStation--;
-            }
-        }
 
-        public void turnUp () {
-            if (currentVolume == maxVolume) {
-                return;
-            }
-            currentVolume++;
-        }
-
-
-        public void turnOff () {
-            if (currentVolume == minVolume) {
-                return;
-            }
-            currentVolume--;
+    public void turnPreviousRadioStation() {
+        if (currentRadioStation == firstRadioStation) {
+            currentRadioStation = lastRadioStation;
+        } else {
+            currentRadioStation--;
         }
     }
+
+    public void turnUpVolume() {
+        if (currentVolume == maxVolume) {
+            return;
+        }
+        currentVolume++;
+    }
+
+    public void turnDownVolume() {
+        if (currentVolume == minVolume) {
+            return;
+        }
+        currentVolume--;
+    }
+}
 
 
 
