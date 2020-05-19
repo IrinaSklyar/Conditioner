@@ -10,8 +10,6 @@ class RadioTest {
     @Test
     void turnNextRadioStation() {
         // проверка валидных значений
-        radio.setLastRadioStation(9);
-        radio.setFirstRadioStation(0);
         radio.setCurrentRadioStation(5);
         radio.turnNextRadioStation();
         int expected = 6;
@@ -22,8 +20,6 @@ class RadioTest {
     @Test
     void turnNextIfCurrentIsCloseToLastStation() {
         //проверка граничных значений
-        radio.setLastRadioStation(9);
-        radio.setFirstRadioStation(0);
         radio.setCurrentRadioStation(8);
         radio.turnNextRadioStation();
         int expected = 9;
@@ -122,6 +118,30 @@ class RadioTest {
         radio.turnDownVolume();
         int expected = 0;
         int actual = radio.getCurrentVolume();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void setCurrentRadioStation() {
+        // проверка валидных значений
+        radio.setCurrentRadioStation(7);
+        radio.chooseCurrentRadioStation();
+        radio.setLastRadioStation(9);
+        radio.setFirstRadioStation(0);
+        int expected = 7;
+        int actual = radio.getCurrentRadioStation();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void setRadioStationIsOutOfValue() {
+        // проверка невалидных значений
+        radio.setCurrentRadioStation(10);
+        radio.chooseCurrentRadioStation();
+        radio.setLastRadioStation(9);
+        radio.setFirstRadioStation(0);
+        int expected = 9;
+        int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
     }
 }
