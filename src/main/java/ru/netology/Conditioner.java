@@ -2,8 +2,8 @@ package ru.netology;
 
 public class Conditioner {
     private String name;
-    private int maxTemperature;
-    private int minTemperature;
+    private int maxTemperature = 35;
+    private int minTemperature = 10;
     private int currentTemperature;
     private boolean on;
 
