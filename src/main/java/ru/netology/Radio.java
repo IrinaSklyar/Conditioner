@@ -87,20 +87,11 @@ public class Radio {
     }
 
     public void chooseCurrentRadioStation() {
-        if (currentRadioStation <= lastRadioStation) {
-            if (currentRadioStation >= firstRadioStation)
-                this.currentRadioStation = currentRadioStation;
-        }
+        if (currentRadioStation > lastRadioStation) {
+            currentRadioStation = lastRadioStation;
+        } else if (currentRadioStation < firstRadioStation) {
+            currentRadioStation = firstRadioStation;
+        } else if (currentRadioStation > firstRadioStation & currentRadioStation < lastRadioStation)
+            return;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
