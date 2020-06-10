@@ -135,7 +135,7 @@ class RadioTest {
     @Test
     void setRadioStationIsOutOfValue() {
         // проверка невалидных значений
-        radio.chooseCurrentRadioStation(-2);
+        radio.chooseCurrentRadioStation(-5);
         radio.setLastRadioStation(9);
         radio.setFirstRadioStation(0);
         int expected = 0;
