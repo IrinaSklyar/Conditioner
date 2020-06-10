@@ -86,12 +86,12 @@ public class Radio {
         currentVolume--;
     }
 
-    public void chooseCurrentRadioStation() {
-        if (currentRadioStation > lastRadioStation) {
+    public void chooseCurrentRadioStation(int newStation) {
+        if (newStation >= lastRadioStation) {
             currentRadioStation = lastRadioStation;
-        } else if (currentRadioStation < firstRadioStation) {
+        } else if (newStation < firstRadioStation) {
             currentRadioStation = firstRadioStation;
-        } else if (currentRadioStation > firstRadioStation & currentRadioStation < lastRadioStation)
-            return;
+        } else if (newStation > firstRadioStation & newStation < lastRadioStation)
+            this.currentRadioStation = newStation;
     }
 }

@@ -122,13 +122,12 @@ class RadioTest {
     }
 
     @Test
-    void setCurrentRadioStation() {
+    void setRadioStationValidValues() {
         // проверка валидных значений
-        radio.setCurrentRadioStation(7);
-        radio.chooseCurrentRadioStation();
+        radio.chooseCurrentRadioStation(5);
         radio.setLastRadioStation(9);
         radio.setFirstRadioStation(0);
-        int expected = 7;
+        int expected = 5;
         int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
     }
@@ -136,19 +135,10 @@ class RadioTest {
     @Test
     void setRadioStationIsOutOfValue() {
         // проверка невалидных значений
-        radio.setCurrentRadioStation(-1);
-        radio.chooseCurrentRadioStation();
+        radio.chooseCurrentRadioStation(-2);
+        radio.setLastRadioStation(9);
+        radio.setFirstRadioStation(0);
         int expected = 0;
-        int actual = radio.getCurrentRadioStation();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void setRadioStationValidValues() {
-        // проверка валидных значений
-        radio.setCurrentRadioStation(8);
-        radio.chooseCurrentRadioStation();
-        int expected = 8;
         int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
     }
